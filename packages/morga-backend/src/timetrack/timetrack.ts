@@ -8,8 +8,12 @@ container.bind<Level>("Level").toConstantValue(new Level("./db"));
 export class LevelTimeTrackController implements ITimeTrackController {
   constructor(private level: Level) {}
 
+  async exists(user: IUser, id: number) {
+    return await this.level.get(`track:${user.id}:${id}`) !== undefined;
+  }
+
   async set(user: IUser, track: ITimeTrack) {
-    await this.level.put(`track:${user.id}`, JSON.stringify(track));
+    await this.level.put(`track:${user.id}:${track.id}`, JSON.stringify(track));
     return true;
   }
 

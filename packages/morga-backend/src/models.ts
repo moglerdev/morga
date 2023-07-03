@@ -15,6 +15,7 @@ export interface ITimeTrack {
 
 export interface ITimeTrackController {
   start(user: IUser): Promise<ITimeTrack>;
+  exists(user: IUser, id: number): Promise<boolean>;
   get(user: IUser): Promise<ITimeTrack | null>;
   getById(user: IUser, id: number): Promise<ITimeTrack | null>;
   getAll(from: number, to: number): Promise<ITimeTrack[]>;
